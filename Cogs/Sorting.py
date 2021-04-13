@@ -1,11 +1,13 @@
 from discord.ext import commands
+from Cogs.utils import make_reply, check_for_elements
 
 
 class Sorting(commands.Cog):
 
     @commands.command(
         name='bubble',
-        brief='Bubble sort',
+        aliases=['bs'],
+        brief='Bubble Sort',
         help='Usage: !bubble 1 2 3 <- All elements are separated by space'
     )
     async def bubble(self, ctx, *args):
@@ -13,24 +15,22 @@ class Sorting(commands.Cog):
         for elem in args:
             __data.append(int(elem))
 
-        if len(__data) < 2: raise ValueError('You need at least 2 elements to sort')
+        check_for_elements(__data, 2)
 
         __steps: str = ''
         n = len(__data)
-        for i in range(n):  # should be n-1
+        for i in range(n - 1):  # should be n-1
             for j in range(0, n - i - 1):
                 if __data[j] > __data[j + 1]:
                     __data[j], __data[j + 1] = __data[j + 1], __data[j]
             __steps += ' '.join((str(elem) for elem in __data)) + '\n'
-            print(__data)  # print array at every step
 
-        await ctx.reply(f'Bubble sort \n'
-                        f'----------- \n'
-                        f'{__steps}')
+        await ctx.reply(make_reply(ctx, __steps))
 
     @commands.command(
         name='insert',
         brief='Insertion Sort',
+        aliases=['is'],
         help='Usage: !insert 1 2 3 <- All elements are separated by space'
     )
     async def insert(self, ctx, *args):
@@ -39,7 +39,7 @@ class Sorting(commands.Cog):
         for elem in args:
             __data.append(int(elem))
 
-        if len(__data) < 2: raise ValueError('You need at least 2 elements to sort')
+        check_for_elements(__data, 2)
 
         def __insertion_sort(arr: list[int]) -> str:
             __steps: str = ''
@@ -53,13 +53,12 @@ class Sorting(commands.Cog):
                 __steps += ' '.join((str(_) for _ in __data)) + '\n'
             return __steps
 
-        await ctx.reply(f'Insert sort \n'
-                        f'----------- \n'
-                        f'{__insertion_sort(__data)}')
+        await ctx.reply(make_reply(ctx, __insertion_sort(__data)))
 
     @commands.command(
         name='select',
         brief='Select sort',
+        aliases=['ss'],
         help='Usage: !select 1 2 3 <- All elements are separated by space'
     )
     async def select(self, ctx, *args):
@@ -68,7 +67,7 @@ class Sorting(commands.Cog):
         for elem in args:
             __data.append(int(elem))
 
-        if len(__data) < 2: raise ValueError('You need at least 2 elements to sort')
+        check_for_elements(__data, 2)
 
         def __select_sort(A: list):
             __steps: str = ''
@@ -81,13 +80,12 @@ class Sorting(commands.Cog):
                 A[i], A[min_idx] = A[min_idx], A[i]
             return __steps
 
-        await ctx.reply(f'Insert sort \n'
-                        f'----------- \n'
-                        f'{__select_sort(__data)}')
+        await ctx.reply(make_reply(ctx, __select_sort(__data)))
 
     @commands.command(
         name='pivot_first',
         brief='Pivot first element',
+        aliases=['pf'],
         help='Usage: !pivot_first 1 2 3 <- All elements are separated by space'
     )
     async def pivot_first(self, ctx, *args):
@@ -96,7 +94,7 @@ class Sorting(commands.Cog):
         for elem in args:
             __data.append(int(elem))
 
-        if len(__data) < 2: raise ValueError('You need at least 2 elements to use this command')
+        check_for_elements(__data, 2)
 
         def __low_partition(arr: list, low: int, high: int) -> str:
             __result = ''
@@ -116,13 +114,12 @@ class Sorting(commands.Cog):
                     return __result
                 arr[i], arr[j] = arr[j], arr[i]
 
-        await ctx.reply(f'Pivot as first element \n'
-                        f'---------------------- \n'
-                        f'{__low_partition(__data, 0, len(__data) - 1)}')
+        await ctx.reply(make_reply(ctx, __low_partition(__data, 0, len(__data) - 1)))
 
     @commands.command(
         name='pivot_last',
         brief='Pivot last element',
+        aliases=['pl'],
         help='Usage: !pivot_last 1 2 3 <- All elements are separated by space'
     )
     async def pivot_last(self, ctx, *args):
@@ -131,7 +128,7 @@ class Sorting(commands.Cog):
         for elem in args:
             __data.append(int(elem))
 
-        if len(__data) < 2: raise ValueError('You need at least 2 elements to use this command')
+        check_for_elements(__data, 2)
 
         def __high_partition(A: list, p: int, r: int) -> str:
             __result = ''
@@ -145,20 +142,19 @@ class Sorting(commands.Cog):
             __result = ' '.join((str(_) for _ in A))
             return __result
 
-        await ctx.reply(f'Pivot as last element \n'
-                        f'---------------------- \n'
-                        f'{__high_partition(__data, 0, len(__data) - 1)}')
+        await ctx.reply(make_reply(ctx, __high_partition(__data, 0, len(__data) - 1)))
 
     async def cog_command_error(self, ctx, error):
         print('debug -> ', error)
         if hasattr(error, 'original'):  # Handle other Exceptions
 
             if isinstance(error.original, ValueError):
-                await ctx.reply(f'{error.original}')
+                await ctx.reply(f'> {error.original}\n'
+                                f'> Please check usage with !help command and try again')
 
         else:  # Handle errors that inherit from CommandError
 
             if isinstance(error, commands.errors.MissingRequiredArgument):
-                await ctx.reply(f'{error}\n'
-                                f'Please check usage with !help command and try again')
+                await ctx.reply(f'> {error}\n'
+                                f'> Please check usage with !help command and try again')
 

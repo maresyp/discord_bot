@@ -3,7 +3,7 @@ from dataclasses import dataclass, field
 
 @dataclass
 class Stack:
-    __stack: list = field(default_factory=lambda: [])
+    __stack: list = field(default_factory=list)
 
     def __str__(self):
         return f"{' '.join((str(x) for x in self.__stack))}"
