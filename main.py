@@ -15,10 +15,17 @@ bot.add_cog(Onp())
 
 
 @bot.event
-async def on_command_error(context: discord.ext.commands.Context, exception: discord.ext.commands):
+async def on_ready():
+    print('Hello, I\'m ready to help you')
 
+
+@bot.event
+async def on_command_error(context: discord.ext.commands.Context, exception: discord.ext.commands):
     if isinstance(exception, discord.ext.commands.errors.CommandNotFound):
         pass
 
-
-bot.run(TOKEN)
+if __name__ == '__main__':
+    if TOKEN is not None:
+        bot.run(TOKEN)
+    else:
+        raise Exception('Token not found, unable to run')
