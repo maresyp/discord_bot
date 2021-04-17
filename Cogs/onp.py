@@ -12,8 +12,20 @@ def infix_to_postfix(infix_expr):
 
     for token in infix_expr.split():
         if len(token) > 1 and token[:1] == '-':
-            if token[1:].isalnum():
+            if '.' in token:
+                try:
+                    float(token)
+                except ValueError:
+                    complex(token)
                 postfix.append(token)
+            elif token[1:].isalnum():
+                postfix.append(token)
+        elif '.' in token:
+            try:
+                float(token)
+            except ValueError:
+                complex(token)
+            postfix.append(token)
         elif token.isalnum():
             postfix.append(token)
         elif token == "(":
@@ -46,7 +58,15 @@ def postfix_eval(postfix_expr: str, show_steps: bool = False) -> str:
             result = do_math(token, a, b)
             operand_stack.push(result)
         else:
-            operand_stack.push(int(token))
+            try:
+                value = int(token)
+            except ValueError:
+                try:
+                    value = float(token)
+                except ValueError:
+                    value = complex(token)
+
+            operand_stack.push(value)
 
         if show_steps: __steps += f"{token}{' ' * (longest - len(token))} | {operand_stack}\n"
     return __steps
