@@ -11,19 +11,23 @@ class Sorting(commands.Cog):
         help='Usage: !bubble 1 2 3 <- All elements are separated by space'
     )
     async def bubble(self, ctx, *args):
+        __changes__: int
         __data: list = []
         for elem in args:
             __data.append(int(elem))
 
-        check_for_elements(__data, 2)
+        check_for_elements(__data, 2, 25)
 
         __steps: str = ''
         n = len(__data)
-        for i in range(n - 1):  # should be n-1
+        for i in range(n):  # should be n-1
+            __changes__ = 0
+            __steps += ' '.join((str(elem) for elem in __data)) + '\n'
             for j in range(0, n - i - 1):
                 if __data[j] > __data[j + 1]:
+                    __changes__ = 1
                     __data[j], __data[j + 1] = __data[j + 1], __data[j]
-            __steps += ' '.join((str(elem) for elem in __data)) + '\n'
+            if __changes__ == 0: break
 
         await ctx.reply(make_reply(ctx, __steps))
 
@@ -39,7 +43,7 @@ class Sorting(commands.Cog):
         for elem in args:
             __data.append(int(elem))
 
-        check_for_elements(__data, 2)
+        check_for_elements(__data, 2, 25)
 
         def __insertion_sort(arr: list[int]) -> str:
             __steps: str = ''
@@ -67,17 +71,17 @@ class Sorting(commands.Cog):
         for elem in args:
             __data.append(int(elem))
 
-        check_for_elements(__data, 2)
+        check_for_elements(__data, 2, 25)
 
-        def __select_sort(A: list):
+        def __select_sort(arr: list):
             __steps: str = ''
-            for i in range(len(A)):
+            for i in range(len(arr)):
                 __steps += ' '.join((str(_) for _ in __data)) + '\n'
                 min_idx = i
-                for j in range(i + 1, len(A)):
-                    if A[min_idx] > A[j]:
+                for j in range(i + 1, len(arr)):
+                    if arr[min_idx] > arr[j]:
                         min_idx = j
-                A[i], A[min_idx] = A[min_idx], A[i]
+                arr[i], arr[min_idx] = arr[min_idx], arr[i]
             return __steps
 
         await ctx.reply(make_reply(ctx, __select_sort(__data)))
@@ -94,7 +98,7 @@ class Sorting(commands.Cog):
         for elem in args:
             __data.append(int(elem))
 
-        check_for_elements(__data, 2)
+        check_for_elements(__data, 2, 50)
 
         def __low_partition(arr: list, low: int, high: int) -> str:
             __result = ''
@@ -128,18 +132,18 @@ class Sorting(commands.Cog):
         for elem in args:
             __data.append(int(elem))
 
-        check_for_elements(__data, 2)
+        check_for_elements(__data, 2, 50)
 
-        def __high_partition(A: list, p: int, r: int) -> str:
+        def __high_partition(arr: list, p: int, r: int) -> str:
             __result = ''
-            x = A[r]
+            x = arr[r]
             i = p - 1
             for j in range(r):
-                if A[j] <= x:
+                if arr[j] <= x:
                     i = i + 1
-                    A[i], A[j] = A[j], A[i]
-            A[i + 1], A[r] = A[r], A[i + 1]
-            __result = ' '.join((str(_) for _ in A))
+                    arr[i], arr[j] = arr[j], arr[i]
+            arr[i + 1], arr[r] = arr[r], arr[i + 1]
+            __result = ' '.join((str(_) for _ in arr))
             return __result
 
         await ctx.reply(make_reply(ctx, __high_partition(__data, 0, len(__data) - 1)))
@@ -149,7 +153,8 @@ class Sorting(commands.Cog):
         if hasattr(error, 'original'):  # Handle other Exceptions
 
             if isinstance(error.original, ValueError):
-                await ctx.reply(f'> {error.original}\n'
+                print(error.original)
+                await ctx.reply(f'> There is something wrong with your input.\n'
                                 f'> Please check usage with !help command and try again')
 
         else:  # Handle errors that inherit from CommandError
@@ -157,4 +162,3 @@ class Sorting(commands.Cog):
             if isinstance(error, commands.errors.MissingRequiredArgument):
                 await ctx.reply(f'> {error}\n'
                                 f'> Please check usage with !help command and try again')
-
