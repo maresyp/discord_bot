@@ -1,15 +1,20 @@
 from discord.ext import commands
+
+from Cogs.utils import make_reply
 from utils.stack import Stack
 
 
 def infix_to_postfix(infix_expr):
     prec = {'^': 3, '*': 2, '/': 2, '+': 1, '-': 1, '(': 0}
 
-    op_stack = Stack([]) # Stos operatorow
-    postfix = [] # Wyjscie
+    op_stack = Stack([])  # Stos operatorow
+    postfix = []  # Wyjscie
 
     for token in infix_expr.split():
-        if token.isalnum():
+        if len(token) > 1 and token[:1] == '-':
+            if token[1:].isalnum():
+                postfix.append(token)
+        elif token.isalnum():
             postfix.append(token)
         elif token == "(":
             op_stack.push(token)
@@ -17,7 +22,7 @@ def infix_to_postfix(infix_expr):
             while op_stack.peek() != '(':
                 postfix.append(op_stack.pop())
 
-            op_stack.pop() # Zrzucenie '(' ze stosu
+            op_stack.pop()  # Zrzucenie '(' ze stosu
         else:
             while not op_stack.is_empty() and prec[op_stack.peek()] >= prec[token]:
                 postfix.append(op_stack.pop())
@@ -70,20 +75,21 @@ class Onp(commands.Cog):
     async def onp(self, ctx, *args):
 
         __input: str = ' '.join((str(_) for _ in args))
-        await ctx.reply(f"```"
-                        f'Odwrócona Notacja Polska    \n'
-                        f'------------------------    \n'
-                        f'[Input]: {__input}          \n'
-                        f'------------------------    \n'
-                        f'{infix_to_postfix(__input)} \n'
-                        f'------------------------    \n'
-                        f'{postfix_eval(infix_to_postfix(__input), show_steps=True)}'
-                        f"```")
+        if len(__input) <= 0: raise ValueError('Not enough args passed')
+
+        output: str = f'[Input]: {__input}          \n' \
+                      f'------------------------    \n' \
+                      f'{infix_to_postfix(__input)} \n' \
+                      f'------------------------    \n' \
+                      f'{postfix_eval(infix_to_postfix(__input), show_steps=True)}'
+
+        await ctx.reply(make_reply(ctx, output))
 
     async def cog_command_error(self, ctx, error):
         print('debug -> ', error)
         if hasattr(error, 'original'):  # Handle other Exceptions
+            print(error.original)  # print error to console
 
             if isinstance(error.original, ValueError):
-                await ctx.reply(f'> {error.original}\n'
+                await ctx.reply(f'> There is something wrong with your input.\n'
                                 f'> Please check usage with !help command and try again')
