@@ -113,3 +113,7 @@ class Onp(commands.Cog):
             if isinstance(error.original, ValueError):
                 await ctx.reply(f'> There is something wrong with your input.\n'
                                 f'> Please check usage with !help command and try again')
+
+            if isinstance(error.original, ZeroDivisionError):
+                await ctx.reply(f'> Pamiętaj cholero nie dziel przez zero!.\n'
+                                f'> Please check usage with !help command and try again')
