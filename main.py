@@ -3,6 +3,7 @@ import discord
 from dotenv import load_dotenv
 from discord.ext import commands
 from Cogs.Sorting import Sorting
+from Cogs.binary_trees import BinaryTrees
 from Cogs.onp import Onp
 
 load_dotenv()
@@ -12,6 +13,7 @@ bot = commands.Bot(command_prefix='!')
 # Add Cogs here
 bot.add_cog(Sorting())
 bot.add_cog(Onp())
+bot.add_cog(BinaryTrees())
 
 
 @bot.event
