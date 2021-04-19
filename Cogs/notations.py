@@ -40,7 +40,8 @@ class Notations(commands.Cog):
         aliastes=['ttc'],
         brief='Theta Check [ BETA ]',
         help=f'Check if c1, c2, n0 are correct for given equation\n'
-             f'Usage: !theta_check'
+             f'Usage: !theta_check <c1> <c1> <n0> <equation>\n'
+             f'Usage: !theta_check 1 7 1 2*n**2 - 3*n + 2'
     )
     async def theta_check(self, ctx, c1: str, c2: str, n0: int, *args):
         user_input: str = ''.join(args)
