@@ -10,10 +10,15 @@ class Notations(commands.Cog):
         name='theta',
         aliases=['tt'],
         brief='Notacja Theta [ BETA ]',
-        help='Usage: !theta 2*n**2 - 3*n + 2'
+        help=f'Usage: !theta 2*n**2 - 3*n + 2\n'
+             f'Usage: !tt n**2 - 2*n\n'
+             f'Or:\n'
+             f'Usage: !theta 2*n^2 - 3^n + 2\n'
+             f'Usage: !tt n^2 - 2^n\n'
     )
     async def theta(self, ctx, *args):
-        user_input = ''.join(args)
+        user_input: str = ''.join(args)
+        user_input = user_input.replace('^', '**')  # just in case someone used ^ power sign instead of **
         n = sympy.symbols('n')
         eq = sympy.parsing.parse_expr(f'({user_input}) / n**2')
         simplified = sympy.simplify(eq)
