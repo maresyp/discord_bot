@@ -8,6 +8,7 @@ class Notations(commands.Cog):
 
     @commands.command(
         name='theta',
+        aliases=['tt'],
         brief='Notacja Theta [ BETA ]',
         help='Usage: !theta 2*n**2 - 3*n + 2'
     )
@@ -28,6 +29,16 @@ class Notations(commands.Cog):
 
         result: str = f'c1 = {c1}, c2 = {c2}, n0 = {n0}'
         await ctx.reply(make_reply(ctx, result))
+
+    @commands.command(
+        name='theta_check',
+        aliastes=['ttc'],
+        brief='Theta Check [ BETA ]',
+        help=f'Check if c1, c2, n0 are correct for given equation\n'
+             f'Usage: !theta_check'
+    )
+    async def theta_check(self, ctx, *args):
+        pass
 
     async def cog_command_error(self, ctx, error):
         print(error)
