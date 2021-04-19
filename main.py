@@ -5,6 +5,7 @@ from discord.ext import commands
 from Cogs.Sorting import Sorting
 from Cogs.binary_trees import BinaryTrees
 from Cogs.git import Git
+from Cogs.notations import Notations
 from Cogs.onp import Onp
 
 load_dotenv()
@@ -16,6 +17,7 @@ bot.add_cog(Sorting())
 bot.add_cog(Onp())
 bot.add_cog(BinaryTrees())
 bot.add_cog(Git())
+bot.add_cog(Notations())
 
 
 @bot.event
