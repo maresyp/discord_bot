@@ -14,5 +14,6 @@ class Git(commands.Cog):
     async def git(self, ctx):
         embed = discord.Embed()
         embed.description = f'Github link for this project:\n' \
+                            f'-------------------------------\n' \
                             f'https://github.com/maresyp/studia_bot'
         await ctx.reply(embed=embed)
