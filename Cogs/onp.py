@@ -89,7 +89,8 @@ class Onp(commands.Cog):
 
     @commands.command(
         name='onp',
-        brief='Odwrócona Notacja Polska',
+        aliases=['rpn'],
+        brief='Reverse Polish Notation',
         help='Usage: !onp ( ( 2 + 7 ) / 3 + ( 14 - 3 ) * 4 ) / 2 <- All elements are separated by space'
     )
     async def onp(self, ctx, *args):
@@ -115,5 +116,5 @@ class Onp(commands.Cog):
                                 f'> Please check usage with !help command and try again')
 
             if isinstance(error.original, ZeroDivisionError):
-                await ctx.reply(f'> Pamiętaj cholero nie dziel przez zero!.\n'
+                await ctx.reply(f'> Zero Division!.\n'
                                 f'> Please check usage with !help command and try again')
