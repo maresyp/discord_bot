@@ -1,8 +1,6 @@
 import discord
 from discord.ext import commands
 
-from Cogs.utils import make_reply
-
 
 class Git(commands.Cog):
 
