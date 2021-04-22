@@ -1,0 +1,11 @@
+---
+application:
+  name: "studia-bot"
+  project: "studia_bot"
+  organization: "QoveryCommunity"
+routers:
+- name: "main-studia-bot"
+  routes:
+  - application_name: "studia-bot"
+    paths:
+    - "/*"
