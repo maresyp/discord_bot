@@ -47,15 +47,16 @@ class Functions(commands.Cog):
         name='fsort',
         brief='Sort Functions [ BETA ]',
         help='Sort functions ( slowest goes first ) [ BETA ]\n'
-             'To separate functions use &\n'
+             'WARNING: sometimes gives wrong answers\n'
+             'To separate functions use & or and\n'
              'Usage: !fsort n^2 & n^3 \n'
              'Usage: !fsort n^2 and n^3 \n\n'
              'n!      -> factorial(n)\n'
              'logn    -> log(n)\n'
              'nlogn   -> n*log(n)\n'
-             '1       -> n(1)\n'
+             '1       -> 1\n'
              'sqrt    -> sqrt(n)\n'
-             'n**1.5 <-> n^1.5'
+             'n^1.5 -> n^(1/2)'
     )
     async def fsort(self, ctx, *args):
         user_input = ''.join(args)
@@ -63,18 +64,20 @@ class Functions(commands.Cog):
         user_input = user_input.split('&')
         check_for_elements(user_input, 2, 10)
         user_input = [sympy.parsing.parse_expr(expr) for expr in user_input]
+        print('user -> ', user_input)
         n = sympy.symbols('n')
 
         def compare(first: str, second: str) -> int:
-            lim = str(sympy.limit_seq(sympy.parsing.parse_expr(f'{str(first)} / {str(second)}'), n))
-            if lim == 'oo': return 1  # first grows faster
-            if lim == '0': return -1  # second grows faster
+            lim = str(sympy.limit_seq(sympy.parsing.parse_expr(f'{first} / {second}'), n))
+            print(f'first -> [{first}] second -> [{second}] -> lim -> {lim}')
+            if lim == 'oo': return 1
+            if lim == '0': return -1
             if lim == '1': return 0  # both are equal
 
             # in case limit goes to number
             simplified = sympy.simplify(lim)
-            if simplified > 0: return -1
-            if simplified < 0: return 1
+            if simplified > 0: return 1
+            if simplified < 0: return -1
             return 0
 
         user_input.sort(key=cmp_to_key(compare))
@@ -90,3 +93,4 @@ if __name__ == '__main__':
     lim = str(sympy.limit_seq(sympy.parsing.parse_expr(f'2*n**2 / n**2'), n))
     s = sympy.simplify(lim)
     print(s)
+
