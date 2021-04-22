@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from discord.ext import commands
 from Cogs.Sorting import Sorting
 from Cogs.binary_trees import BinaryTrees
+from Cogs.functions import Functions
 from Cogs.git import Git
 from Cogs.notations import Notations
 from Cogs.onp import Onp
@@ -18,6 +19,7 @@ bot.add_cog(Onp())
 bot.add_cog(BinaryTrees())
 bot.add_cog(Git())
 bot.add_cog(Notations())
+bot.add_cog(Functions())
 
 
 @bot.event
@@ -29,6 +31,7 @@ async def on_ready():
 async def on_command_error(context: discord.ext.commands.Context, exception: discord.ext.commands):
     if isinstance(exception, discord.ext.commands.errors.CommandNotFound):
         pass
+
 
 if __name__ == '__main__':
     if TOKEN is not None:
