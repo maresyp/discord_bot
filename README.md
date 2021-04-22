@@ -1,1 +1,1 @@
-# Discord bot that helps with alghoritms and data structures
+# Discord bot that helps with algorithms and data structures
