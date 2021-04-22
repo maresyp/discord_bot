@@ -37,11 +37,12 @@ class Notations(commands.Cog):
 
     @commands.command(
         name='theta_check',
-        aliastes=['ttc'],
+        aliases=['ttc'],
         brief='Theta Check [ BETA ]',
         help=f'Check if c1, c2, n0 are correct for given equation\n'
+             f'Note: If you want to calculate correct answer use !theta command instead\n'
              f'Usage: !theta_check <c1> <c1> <n0> <equation>\n'
-             f'Usage: !theta_check 1 7 1 2*n**2 - 3*n + 2'
+             f'Usage: !theta_check 1 7 1 2*n**2 - 3*n + 2\n'
     )
     async def theta_check(self, ctx, c1: str, c2: str, n0: int, *args):
         user_input: str = ''.join(args)
@@ -54,9 +55,9 @@ class Notations(commands.Cog):
         c1_check = sympy.simplify(f"{str(simplified).replace('n', f'{n0}')}")
         print(f'c1 = {str(c1_check) == c1}, c2 = {c2_check == c2}, n0 = {n0_check}')  # TODO: DEBUG
 
-        result: str = f'{user_input}\n' \
-                      f"c1 = {c1} -> {'Correct' if str(c1_check) == c1 else f'Wrong, should be {c1_check}'}\n" \
-                      f"c2 = {c2} -> {'Correct' if str(c2_check) == c2 else f'Wrong, should be {c2_check}'}\n" \
+        result: str = f'{user_input}\n\n' \
+                      f"c1 = {c1} -> {'Correct' if str(c1_check) == c1 else 'Wrong'}\n" \
+                      f"c2 = {c2} -> {'Correct' if str(c2_check) == c2 else 'Wrong'}\n" \
                       f"n0 = {n0} -> {'Correct' if n0_check else 'Wrong'}\n"
 
         await ctx.reply(make_reply(ctx, result))
