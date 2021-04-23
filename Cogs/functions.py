@@ -16,6 +16,7 @@ class Functions(commands.Cog):
         brief='Plot Drawing [ BETA ]',
         help='Draw plot of function(s)\n'
              'Usage: !plot n^2 & n**3 and n^4\n'
+             'Usage: !plot Abs(sin(x))+5*E^(-x^100)*cos(x)'
     )
     async def plot(self, ctx, *args):
         user_input: str = ''.join(args)
@@ -70,14 +71,14 @@ class Functions(commands.Cog):
         def compare(first: str, second: str) -> int:
             lim = str(sympy.limit_seq(sympy.parsing.parse_expr(f'{first} / {second}'), n))
             print(f'first -> [{first}] second -> [{second}] -> lim -> {lim}')
-            if lim == 'oo': return 1
-            if lim == '0': return -1
+            if lim == 'oo': return -1  # f(x) grows faster
+            if lim == '0': return 1  # f(x) grows slower
             if lim == '1': return 0  # both are equal
 
             # in case limit goes to number
             simplified = sympy.simplify(lim)
-            if simplified > 0: return 1
-            if simplified < 0: return -1
+            if simplified > 0: return -1
+            if simplified < 0: return 1
             return 0
 
         user_input.sort(key=cmp_to_key(compare))
@@ -93,4 +94,6 @@ if __name__ == '__main__':
     lim = str(sympy.limit_seq(sympy.parsing.parse_expr(f'2*n**2 / n**2'), n))
     s = sympy.simplify(lim)
     print(s)
+    x = 'print(10)'
+    sympy.parsing.parse_expr(f'{x}')
 
