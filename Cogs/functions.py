@@ -71,8 +71,8 @@ class Functions(commands.Cog):
         def compare(first: str, second: str) -> int:
             lim = str(sympy.limit_seq(sympy.parsing.parse_expr(f'{first} / {second}'), n))
             print(f'first -> [{first}] second -> [{second}] -> lim -> {lim}')
-            if lim == 'oo': return -1  # f(x) grows faster
-            if lim == '0': return 1  # f(x) grows slower
+            if lim == 'oo': return 1  # f(x) grows faster
+            if lim == '0': return -1  # f(x) grows slower
             if lim == '1': return 0  # both are equal
 
             # in case limit goes to number
