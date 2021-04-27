@@ -1,6 +1,6 @@
 from discord.ext import commands
 
-from Cogs.utils import make_reply
+from utils.utils import make_reply
 from utils.stack import Stack
 
 

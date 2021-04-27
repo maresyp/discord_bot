@@ -1,8 +1,7 @@
 from discord.ext import commands
 import binarytree
-from heapq import heapify
 
-from Cogs.utils import make_reply
+from utils.utils import make_reply
 
 
 class BinaryTrees(commands.Cog):
@@ -44,13 +43,3 @@ if __name__ == '__main__':
 
     # Generate a random max heap and return its root node.
     my_heap = binarytree.heap(height=3, is_max=True, is_perfect=False)
-
-    print(my_bst.postorder)
-    print(my_tree)
-    print(my_heap)
-
-    lista = [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
-    lista.reverse()
-    tree = binarytree.build(lista)
-
-    print(tree)

@@ -1,5 +1,5 @@
 from discord.ext import commands
-from Cogs.utils import make_reply, check_for_elements
+from utils.utils import make_reply, check_for_elements
 
 
 class Sorting(commands.Cog):

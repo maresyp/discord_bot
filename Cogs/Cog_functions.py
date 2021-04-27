@@ -2,7 +2,7 @@ import matplotlib
 import sympy
 import discord
 from discord.ext import commands
-from Cogs.utils import make_reply, check_for_elements
+from utils.utils import make_reply, check_for_elements
 from functools import cmp_to_key
 
 # set backend to non interactive
@@ -91,8 +91,14 @@ class Functions(commands.Cog):
 
 if __name__ == '__main__':
     n = sympy.symbols('n')
+    expr = sympy.parsing.parse_expr('n**2 / n**3')
+    simplified = sympy.simplify(expr)
+
+    print(sympy.limit_seq(expr, n))
+    print(sympy.limit_seq(simplified, n))
+
     lim = str(sympy.limit_seq(sympy.parsing.parse_expr(f'2*n**2 / n**2'), n))
-    s = sympy.simplify(lim)
+    s = sympy.simplify(sympy.parsing.parse_expr('n**2 / n**3'))
     print(s)
     x = 'print(10)'
     sympy.parsing.parse_expr(f'{x}')
