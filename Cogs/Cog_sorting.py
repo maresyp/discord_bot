@@ -2,9 +2,9 @@ import asyncio
 
 from discord.ext import commands
 
-from utils.sorting import bubble_sort, insert_sort
+from utils.sorting import bubble_sort, insert_sort, select_sort, pivot_first, pivot_last
 from utils.utils import make_reply, check_for_elements
-
+from typing import Union
 
 class Sorting(commands.Cog):
 
@@ -14,13 +14,10 @@ class Sorting(commands.Cog):
         brief='Bubble Sort',
         help='Usage: !bubble 1 2 3 <- All elements are separated by space'
     )
-    async def bubble(self, ctx, *args):
-        __data: list = []
-        for elem in args:
-            __data.append(int(elem))
+    async def bubble(self, ctx, *args: Union[int, float, complex]):
 
         # run in separate thread for non blocking io
-        result = await asyncio.to_thread(bubble_sort, __data, 2, 100)
+        result: tuple[list, str] = await asyncio.to_thread(bubble_sort, args, 2, 100)
         await ctx.reply(make_reply(ctx, result[1]))
 
     @commands.command(
@@ -36,7 +33,7 @@ class Sorting(commands.Cog):
             __data.append(int(elem))
 
         # run in separate thread for non blocking io
-        result = await asyncio.to_thread(insert_sort, __data, 2, 100)
+        result: tuple[list, str] = await asyncio.to_thread(insert_sort, __data, 2, 100)
         await ctx.reply(make_reply(ctx, result[1]))
 
     @commands.command(
@@ -51,20 +48,9 @@ class Sorting(commands.Cog):
         for elem in args:
             __data.append(int(elem))
 
-        check_for_elements(__data, 2, 25)
-
-        def __select_sort(arr: list):
-            __steps: str = ''
-            for i in range(len(arr)):
-                __steps += ' '.join((str(_) for _ in __data)) + '\n'
-                min_idx = i
-                for j in range(i + 1, len(arr)):
-                    if arr[min_idx] > arr[j]:
-                        min_idx = j
-                arr[i], arr[min_idx] = arr[min_idx], arr[i]
-            return __steps
-
-        await ctx.reply(make_reply(ctx, __select_sort(__data)))
+        # run in separate thread for non blocking io
+        result: tuple[list, str] = await asyncio.to_thread(select_sort, __data, 2, 100)
+        await ctx.reply(make_reply(ctx, result[1]))
 
     @commands.command(
         name='pivot_first',
@@ -72,33 +58,15 @@ class Sorting(commands.Cog):
         aliases=['pf'],
         help='Usage: !pivot_first 1 2 3 <- All elements are separated by space'
     )
-    async def pivot_first(self, ctx, *args):
+    async def pv_first(self, ctx, *args):
 
         __data: list = []
         for elem in args:
             __data.append(int(elem))
 
-        check_for_elements(__data, 2, 50)
-
-        def __low_partition(arr: list, low: int, high: int) -> str:
-            __result = ''
-            pivot = arr[low]
-            i = low - 1
-            j = high + 1
-
-            while True:
-                i += 1
-                while arr[i] < pivot:
-                    i += 1
-                j -= 1
-                while arr[j] > pivot:
-                    j -= 1
-                if i >= j:
-                    __result = ' '.join((str(_) for _ in arr))
-                    return __result
-                arr[i], arr[j] = arr[j], arr[i]
-
-        await ctx.reply(make_reply(ctx, __low_partition(__data, 0, len(__data) - 1)))
+        result: list = await asyncio.to_thread(pivot_first, __data, 2, 100)
+        result: str = ' '.join((str(elem) for elem in result))
+        await ctx.reply(make_reply(ctx, result))
 
     @commands.command(
         name='pivot_last',
@@ -106,27 +74,15 @@ class Sorting(commands.Cog):
         aliases=['pl'],
         help='Usage: !pivot_last 1 2 3 <- All elements are separated by space'
     )
-    async def pivot_last(self, ctx, *args):
+    async def pv_last(self, ctx, *args):
 
         __data: list = []
         for elem in args:
             __data.append(int(elem))
 
-        check_for_elements(__data, 2, 50)
-
-        def __high_partition(arr: list, p: int, r: int) -> str:
-            __result = ''
-            x = arr[r]
-            i = p - 1
-            for j in range(r):
-                if arr[j] <= x:
-                    i = i + 1
-                    arr[i], arr[j] = arr[j], arr[i]
-            arr[i + 1], arr[r] = arr[r], arr[i + 1]
-            __result = ' '.join((str(_) for _ in arr))
-            return __result
-
-        await ctx.reply(make_reply(ctx, __high_partition(__data, 0, len(__data) - 1)))
+        result: list = await asyncio.to_thread(pivot_last, __data, 2, 100)
+        result: str = ' '.join((str(elem) for elem in result))
+        await ctx.reply(make_reply(ctx, result))
 
     async def cog_command_error(self, ctx, error):
         print('debug -> ', error)
