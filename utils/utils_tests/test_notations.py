@@ -1,6 +1,6 @@
 import unittest
 
-from Cogs.Cog_notations import is_correct_theta
+from utils.notations import is_correct_theta
 
 
 class TestIsCorrectTheta(unittest.TestCase):
