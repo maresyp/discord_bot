@@ -85,5 +85,5 @@ class Sorting(commands.Cog):
                                 f'> Please check usage with !help command and try again')
             # Converter failed on all types from Union
             if isinstance(error, commands.errors.BadUnionArgument):
-                await ctx.reply(f'> {error}\n'
+                await ctx.reply(f'> Input should be int or float type\n'
                                 f'> Please check usage with !help command and try again')
