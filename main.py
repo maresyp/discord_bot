@@ -2,12 +2,12 @@ import os
 import discord
 from dotenv import load_dotenv
 from discord.ext import commands
-from Cogs.Sorting import Sorting
-from Cogs.binary_trees import BinaryTrees
-from Cogs.functions import Functions
-from Cogs.git import Git
-from Cogs.notations import Notations
-from Cogs.onp import Onp
+from Cogs.Cog_sorting import Sorting
+from Cogs.Cog_binary_trees import BinaryTrees
+from Cogs.Cog_functions import Functions
+from Cogs.Cog_git import Git
+from Cogs.Cog_notations import Notations
+from Cogs.Cog_rpn import Onp
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN', default=None)
