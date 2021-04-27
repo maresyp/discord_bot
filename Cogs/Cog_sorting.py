@@ -3,7 +3,7 @@ import asyncio
 from discord.ext import commands
 
 from utils.sorting import bubble_sort, insert_sort, select_sort, pivot_first, pivot_last
-from utils.utils import make_reply, check_for_elements
+from utils.utils import make_reply
 from typing import Union
 
 
