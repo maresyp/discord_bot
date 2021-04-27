@@ -2,7 +2,7 @@ import asyncio
 
 from discord.ext import commands
 
-from utils.sorting import bubble_sort
+from utils.sorting import bubble_sort, insert_sort
 from utils.utils import make_reply, check_for_elements
 
 
@@ -35,21 +35,9 @@ class Sorting(commands.Cog):
         for elem in args:
             __data.append(int(elem))
 
-        check_for_elements(__data, 2, 25)
-
-        def __insertion_sort(arr: list[int]) -> str:
-            __steps: str = ''
-            for i in range(1, len(arr)):
-                key = arr[i]
-                j = i - 1
-                while j >= 0 and key < arr[j]:
-                    arr[j + 1] = arr[j]
-                    j -= 1
-                arr[j + 1] = key
-                __steps += ' '.join((str(_) for _ in __data)) + '\n'
-            return __steps
-
-        await ctx.reply(make_reply(ctx, __insertion_sort(__data)))
+        # run in separate thread for non blocking io
+        result = await asyncio.to_thread(insert_sort, __data, 2, 100)
+        await ctx.reply(make_reply(ctx, result[1]))
 
     @commands.command(
         name='select',
