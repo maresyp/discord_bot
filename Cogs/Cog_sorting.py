@@ -1,4 +1,8 @@
+import asyncio
+
 from discord.ext import commands
+
+from utils.sorting import bubble_sort
 from utils.utils import make_reply, check_for_elements
 
 
@@ -11,25 +15,13 @@ class Sorting(commands.Cog):
         help='Usage: !bubble 1 2 3 <- All elements are separated by space'
     )
     async def bubble(self, ctx, *args):
-        __changes__: int
         __data: list = []
         for elem in args:
             __data.append(int(elem))
 
-        check_for_elements(__data, 2, 25)
-
-        __steps: str = ''
-        n = len(__data)
-        for i in range(n):  # should be n-1
-            __changes__ = 0
-            __steps += ' '.join((str(elem) for elem in __data)) + '\n'
-            for j in range(0, n - i - 1):
-                if __data[j] > __data[j + 1]:
-                    __changes__ = 1
-                    __data[j], __data[j + 1] = __data[j + 1], __data[j]
-            if __changes__ == 0: break
-
-        await ctx.reply(make_reply(ctx, __steps))
+        # run in separate thread for non blocking io
+        result = await asyncio.to_thread(bubble_sort, __data, 2, 100)
+        await ctx.reply(make_reply(ctx, result[1]))
 
     @commands.command(
         name='insert',
