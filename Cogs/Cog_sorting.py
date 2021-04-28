@@ -20,7 +20,6 @@ class Sorting(commands.Cog):
     )
     async def bubble(self, ctx, *args: Union[int, float]):
 
-        # run in separate thread for non blocking io
         result: tuple[list, str] = await asyncio.to_thread(bubble_sort, list(args), MIN_ELEMENTS, MAX_ELEMENTS)
         await ctx.reply(make_reply(ctx, result[1]))
 
@@ -32,7 +31,6 @@ class Sorting(commands.Cog):
     )
     async def insert(self, ctx, *args: Union[int, float]):
 
-        # run in separate thread for non blocking io
         result: tuple[list, str] = await asyncio.to_thread(insert_sort, list(args), MIN_ELEMENTS, MAX_ELEMENTS)
         await ctx.reply(make_reply(ctx, result[1]))
 
@@ -44,7 +42,6 @@ class Sorting(commands.Cog):
     )
     async def select(self, ctx, *args: Union[int, float]):
 
-        # run in separate thread for non blocking io
         result: tuple[list, str] = await asyncio.to_thread(select_sort, list(args), MIN_ELEMENTS, MAX_ELEMENTS)
         await ctx.reply(make_reply(ctx, result[1]))
 
