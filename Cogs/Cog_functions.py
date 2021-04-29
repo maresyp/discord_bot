@@ -2,8 +2,9 @@ import matplotlib
 import sympy
 import discord
 from discord.ext import commands
-from utils.utils import make_reply, check_for_elements
-from functools import cmp_to_key
+
+from utils.functions import sort_functions
+from utils.utils import make_reply
 
 # set backend to non interactive
 matplotlib.use('agg')
@@ -63,43 +64,9 @@ class Functions(commands.Cog):
         user_input = ''.join(args)
         user_input = user_input.replace('^', '**').replace('and', '&')
         user_input = user_input.split('&')
-        check_for_elements(user_input, 2, 10)
-        user_input = [sympy.parsing.parse_expr(expr) for expr in user_input]
-        print('user -> ', user_input)
-        n = sympy.symbols('n')
 
-        def compare(first: str, second: str) -> int:
-            lim = str(sympy.limit_seq(sympy.parsing.parse_expr(f'{first} / {second}'), n))
-            print(f'first -> [{first}] second -> [{second}] -> lim -> {lim}')
-            if lim == 'oo': return 1  # f(x) grows faster
-            if lim == '0': return -1  # f(x) grows slower
-            if lim == '1': return 0  # both are equal
-
-            # in case limit goes to number
-            simplified = sympy.simplify(lim)
-            if simplified > 0: return -1
-            if simplified < 0: return 1
-            return 0
-
-        user_input.sort(key=cmp_to_key(compare))
-        result = '\n'.join((str(eq) for eq in user_input)).replace('**', '^')
+        result = '\n'.join(sort_functions(user_input, 2, 10)).replace('**', '^')
         await ctx.reply(make_reply(ctx, result))
 
     async def cog_command_error(self, ctx, error):
         print(error)
-
-
-if __name__ == '__main__':
-    n = sympy.symbols('n')
-    expr = sympy.parsing.parse_expr('n**2 / n**3')
-    simplified = sympy.simplify(expr)
-
-    print(sympy.limit_seq(expr, n))
-    print(sympy.limit_seq(simplified, n))
-
-    lim = str(sympy.limit_seq(sympy.parsing.parse_expr(f'2*n**2 / n**2'), n))
-    s = sympy.simplify(sympy.parsing.parse_expr('n**2 / n**3'))
-    print(s)
-    x = 'print(10)'
-    sympy.parsing.parse_expr(f'{x}')
-
