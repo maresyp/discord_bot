@@ -5,7 +5,7 @@ import sympy
 
 def sort_functions(arr: list[str], min_len: int, max_len: int) -> list[str]:
     """
-    Sort functions by asymptotic growth
+    Sort functions by asymptotic growth ( Slower goes first )\n
     :param arr: list of functions\n
     :param min_len: min len of arr\n
     :param max_len: max len of arr\n
@@ -32,6 +32,7 @@ def sort_functions(arr: list[str], min_len: int, max_len: int) -> list[str]:
         return 0
 
     return [str(elem) for elem in sorted(converted_arr, key=cmp_to_key(compare))]
+
 
 if __name__ == '__main__':
     print(sympy.parse_expr('adwda'))
