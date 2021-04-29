@@ -1,3 +1,5 @@
+import asyncio
+
 import matplotlib
 import sympy
 import discord
@@ -64,8 +66,9 @@ class Functions(commands.Cog):
         user_input = ''.join(args)
         user_input = user_input.replace('^', '**').replace('and', '&')
         user_input = user_input.split('&')
-        print(user_input)
-        result = '\n'.join(sort_functions(user_input, 2, 10)).replace('**', '^')
+        sorted_input: list = await asyncio.to_thread(sort_functions, user_input, 2, 10)
+
+        result: str = '\n'.join(sorted_input).replace('**', '^')
         await ctx.reply(make_reply(ctx, result))
 
     async def cog_command_error(self, ctx, error):
