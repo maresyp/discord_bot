@@ -58,13 +58,13 @@ class Functions(commands.Cog):
              'nlogn   -> n*log(n)\n'
              '1       -> 1\n'
              'sqrt    -> sqrt(n)\n'
-             'n^1.5 -> n^(1/2)'
+             'n^1.5   -> n^(1/2)'
     )
     async def fsort(self, ctx, *args):
         user_input = ''.join(args)
         user_input = user_input.replace('^', '**').replace('and', '&')
         user_input = user_input.split('&')
-
+        print(user_input)
         result = '\n'.join(sort_functions(user_input, 2, 10)).replace('**', '^')
         await ctx.reply(make_reply(ctx, result))
 
