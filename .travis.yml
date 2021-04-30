@@ -1,6 +1,5 @@
 language: python
 python:
-  - "3.9"
   - "3.9-dev"  # 3.9 development branch
 services:
   - docker
