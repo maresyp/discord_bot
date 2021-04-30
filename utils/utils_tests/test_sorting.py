@@ -107,6 +107,11 @@ class TestPivotLast(unittest.TestCase):
             pivot_last([5, 6, 16, 10, 12, 11, 7, 18, 9], 2, 15)
         )
 
+        self.assertListEqual(
+            [1, 2, 3],
+            pivot_last([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 2, 20)
+        )
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
