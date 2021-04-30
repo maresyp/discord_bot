@@ -49,7 +49,7 @@ class Functions(commands.Cog):
 
     @commands.command(
         name='fsort',
-        brief='Sort Functions [ BETA ]',
+        brief='Sort Functions',
         help='Sort functions ( slowest goes first ) [ BETA ]\n'
              'WARNING: sometimes gives wrong answers\n'
              'To separate functions use & or and\n'
