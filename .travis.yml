@@ -1,9 +1,0 @@
-language: python
-python:
-  - "3.9-dev"  # 3.9 development branch
-services:
-  - docker
-install:
-  - pip install -r requirements.txt
-script:
-  - python3 -m unittest
