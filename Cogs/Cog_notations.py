@@ -1,7 +1,6 @@
 import asyncio
 
 from discord.ext import commands
-import sympy
 
 from utils.notations import calculate_theta, is_correct_theta
 from utils.utils import make_reply
