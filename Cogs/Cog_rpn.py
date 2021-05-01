@@ -1,3 +1,5 @@
+import asyncio
+
 from discord.ext import commands
 
 from utils.rpn import infix_to_postfix, postfix_eval
@@ -17,11 +19,13 @@ class Onp(commands.Cog):
         __input: str = ' '.join((str(_) for _ in args))
         if len(__input) <= 0: raise ValueError('Not enough args passed')
 
-        output: str = f'[Input]: {__input}          \n' \
-                      f'------------------------    \n' \
-                      f'{infix_to_postfix(__input)} \n' \
-                      f'------------------------    \n' \
-                      f'{postfix_eval(infix_to_postfix(__input), show_steps=True)}'
+        postfix: str = await asyncio.to_thread(infix_to_postfix, __input)
+        result: str = await asyncio.to_thread(postfix_eval, postfix, show_steps=True)
+        output: str = f'[Input]:  {__input}       \n' \
+                      f'------------------------   \n' \
+                      f'[Output]: {postfix}         \n' \
+                      f'------------------------     \n' \
+                      f'{result}'
 
         await ctx.reply(make_reply(ctx, output))
 
