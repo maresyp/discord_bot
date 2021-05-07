@@ -50,9 +50,8 @@ class Functions(commands.Cog):
     @commands.command(
         name='fsort',
         brief='Sort Functions',
-        help='Sort functions ( slowest goes first ) [ BETA ]\n'
-             'WARNING: sometimes gives wrong answers\n'
-             'To separate functions use & or and\n'
+        help='Sort functions ( slowest goes first )\n'
+             'To separate functions use "&" or "and"\n'
              'Usage: !fsort n^2 & n^3 \n'
              'Usage: !fsort n^2 and n^3 \n\n'
              'n!      -> factorial(n)\n'
