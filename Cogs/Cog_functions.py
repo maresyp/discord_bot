@@ -59,7 +59,7 @@ class Functions(commands.Cog):
              'nlogn   -> n*log(n)\n'
              '1       -> 1\n'
              'sqrt    -> sqrt(n)\n'
-             'n^1.5   -> n^(1/2)'
+             'n^0.5   -> n^(1/2)'
     )
     async def fsort(self, ctx, *args):
         user_input = ''.join(args)
