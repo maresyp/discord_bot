@@ -31,7 +31,7 @@ class Notations(commands.Cog):
         brief='Theta Check [ BETA ]',
         help=f'Check if c1, c2, n0 are correct for given equation\n'
              f'Note: If you want to calculate correct answer use !theta command instead\n'
-             f'Usage: !theta_check <c1> <c1> <n0> <equation>\n'
+             f'Usage: !theta_check <c1> <c2> <n0> <equation>\n'
              f'Usage: !theta_check 1 7 1 2*n**2 - 3*n + 2\n'
     )
     async def theta_check(self, ctx, c1: str, c2: str, n0: int, *args):
