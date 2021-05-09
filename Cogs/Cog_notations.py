@@ -28,7 +28,7 @@ class Notations(commands.Cog):
     @commands.command(
         name='theta_check',
         aliases=['ttc'],
-        brief='Theta Check [ BETA ]',
+        brief='Theta Check',
         help=f'Check if c1, c2, n0 are correct for given equation\n'
              f'Note: If you want to calculate correct answer use !theta command instead\n'
              f'Usage: !theta_check <c1> <c2> <n0> <equation>\n'
