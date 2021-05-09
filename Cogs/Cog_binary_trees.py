@@ -40,15 +40,10 @@ class BinaryTrees(commands.Cog):
     async def test_com(self, ctx):
         x = [15, 1, 6, 11, 10, 2, 3, 12, 8]
         import heapq
-        from graphviz import Digraph
         heapq._heapify_max(x)
         tree = binarytree.build(x)
-        graph: Digraph = tree.graphviz()
-        graph.render('./tmp_graph', format='png')
 
-        with open('tmp_graph', mode='rb') as file:
-            d_file = discord.File(file, filename='./tmp_graph.png')
-        await ctx.reply(make_reply(ctx, 'result'), file=d_file)
+        await ctx.reply(make_reply(ctx, tree.__str__()))
 
     async def cog_command_error(self, ctx, error):
         print(error)
