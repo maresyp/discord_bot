@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+import asyncio
 
 
 class HeapTrees(commands.Cog):
@@ -10,7 +11,7 @@ class HeapTrees(commands.Cog):
         brief='Heap Max',
         help='Usage: !heap_build_max 1 2 3 4 5'
     )
-    def build_max(self, ctx):
+    async def build_max(self, ctx, *args: int):
         pass
 
     @commands.command(
@@ -19,7 +20,7 @@ class HeapTrees(commands.Cog):
         brief='Heap Min',
         help='Usage: !heap_build_min 1 2 3 4 5'
     )
-    def build_max(self, ctx):
+    async def build_max(self, ctx, *args: int):
         pass
 
     @commands.command(
@@ -28,6 +29,5 @@ class HeapTrees(commands.Cog):
         brief='Heap',
         help='Usage: !heap_build 1 2 3 4 5'
     )
-    def build_max(self, ctx):
+    async def build_max(self, ctx, *args: int):
         pass
-
