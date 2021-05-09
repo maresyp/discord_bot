@@ -35,17 +35,6 @@ class BinaryTrees(commands.Cog):
     async def bst_tree(self, ctx):
         await ctx.reply(make_reply(ctx, str(binarytree.bst(height=3, is_perfect=False))))
 
-    @commands.command(
-        name='test'
-    )
-    async def test_com(self, ctx, *args: int):
-        tree = build_heap(list(args))
-        result = f'{get_properties(tree)}\n{tree.__str__()}'
-        await ctx.reply(make_reply(ctx, result))
-
-    async def cog_command_error(self, ctx, error):
-        print(error)
-
 
 if __name__ == '__main__':
     # Generate a random binary tree and return its root node.
