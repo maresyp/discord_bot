@@ -4,4 +4,3 @@ sympy
 binarytree
 matplotlib
 jupyter
-graphviz
