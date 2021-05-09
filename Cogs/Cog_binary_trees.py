@@ -2,6 +2,7 @@ from discord.ext import commands
 import binarytree
 import discord
 
+from utils.heap_tree import build_max_heap, get_properties
 from utils.utils import make_reply
 
 
@@ -37,13 +38,10 @@ class BinaryTrees(commands.Cog):
     @commands.command(
         name='test'
     )
-    async def test_com(self, ctx):
-        x = [15, 1, 6, 11, 10, 2, 3, 12, 8]
-        import heapq
-        heapq._heapify_max(x)
-        tree = binarytree.build(x)
-
-        await ctx.reply(make_reply(ctx, tree.__str__()))
+    async def test_com(self, ctx, *args: int):
+        tree = build_max_heap(list(args))
+        result = f'{get_properties(tree)}\n{tree.__str__()}'
+        await ctx.reply(make_reply(ctx, result))
 
     async def cog_command_error(self, ctx, error):
         print(error)
