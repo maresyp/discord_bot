@@ -50,6 +50,10 @@ class BinaryTrees(commands.Cog):
             d_file = discord.File(file, filename='./tmp_graph.png')
         await ctx.reply(make_reply(ctx, 'result'), file=d_file)
 
+    async def cog_command_error(self, ctx, error):
+        print(error)
+        await ctx.reply(error)
+
 
 if __name__ == '__main__':
     # Generate a random binary tree and return its root node.
