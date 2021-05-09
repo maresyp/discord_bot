@@ -3,6 +3,8 @@ application:
   name: "studia-bot"
   project: "studia_bot"
   organization: "QoveryCommunity"
+  cpu: 2
+  ram: 1024MB
 routers:
 - name: "main-studia-bot"
   routes:
