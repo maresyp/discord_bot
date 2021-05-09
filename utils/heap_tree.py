@@ -13,6 +13,10 @@ def build_max_heap(arr: list[int]) -> binarytree.Node:
     return binarytree.build(arr)
 
 
+def build_heap(arr: list[int]) -> binarytree.Node:
+    return binarytree.build(arr)
+
+
 def build_min_heap(arr: list[int]) -> binarytree.Node:
     heapq.heapify(arr)
     return binarytree.build(arr)
