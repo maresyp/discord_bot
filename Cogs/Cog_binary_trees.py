@@ -45,7 +45,6 @@ class BinaryTrees(commands.Cog):
 
     async def cog_command_error(self, ctx, error):
         print(error)
-        await ctx.reply(error)
 
 
 if __name__ == '__main__':
