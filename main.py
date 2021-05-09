@@ -24,6 +24,7 @@ bot.add_cog(Notations())
 bot.add_cog(Functions())
 bot.add_cog(HeapTrees())
 
+
 @bot.event
 async def on_ready():
     print('Hello, I\'m ready to help you')
