@@ -2,6 +2,8 @@ import os
 import discord
 from dotenv import load_dotenv
 from discord.ext import commands
+
+from Cogs.Cog_heap_tree import HeapTrees
 from Cogs.Cog_sorting import Sorting
 from Cogs.Cog_binary_trees import BinaryTrees
 from Cogs.Cog_functions import Functions
@@ -20,7 +22,7 @@ bot.add_cog(BinaryTrees())
 bot.add_cog(Git())
 bot.add_cog(Notations())
 bot.add_cog(Functions())
-
+bot.add_cog(HeapTrees())
 
 @bot.event
 async def on_ready():
