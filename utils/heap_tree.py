@@ -9,8 +9,7 @@ def get_properties(tree: binarytree.Node) -> str:
     """
     if not isinstance(tree, binarytree.Node):
         raise TypeError
-    return ''.join((f'{key}: {value}\n' for key, value in tree.properties.items())) \
-           + ' '.join((str(_) for _ in tree.values))
+    return ''.join((f'{key}: {value}\n' for key, value in tree.properties.items()))
 
 
 def prepare_response(arr: list[int], build_mode: Callable[[list[int]], binarytree.Node]) -> str:
