@@ -5,7 +5,7 @@ from typing import Callable
 
 def get_properties(tree: binarytree.Node) -> str:
     """
-    Get all properties and values of tree in form of str
+    Get all properties of tree in form of str
     """
     if not isinstance(tree, binarytree.Node):
         raise TypeError
