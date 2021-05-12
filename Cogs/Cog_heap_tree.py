@@ -43,3 +43,6 @@ class HeapTrees(commands.Cog):
     async def build_x(self, ctx, *args: Optional[int]):
         response: str = await asyncio.to_thread(prepare_response, list(args), build_heap)
         await ctx.reply(make_reply(ctx, response))
+
+    async def cog_command_error(self, ctx, error):
+        ctx.reply(f'{error}')
