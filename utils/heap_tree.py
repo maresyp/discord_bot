@@ -12,7 +12,7 @@ def get_properties(tree: binarytree.Node) -> str:
     return ''.join((f'{key}: {value}\n' for key, value in tree.properties.items()))
 
 
-def prepare_response(arr: list[int], build_mode: Callable[[list[int]], binarytree.Node]) -> str:
+def prepare_response(arr: list[int, None], build_mode: Callable[[list[int]], binarytree.Node]) -> str:
     """
     Generate tree from list representation using build_mode parameter\n
     :param build_mode: Callable that is responsible for creating heap tree\n
@@ -26,7 +26,7 @@ def prepare_response(arr: list[int], build_mode: Callable[[list[int]], binarytre
     return result
 
 
-def build_max_heap(arr: list[int]) -> binarytree.Node:
+def build_max_heap(arr: list[int, None]) -> binarytree.Node:
     """
     Build max heap tree using binarytree.build\n
     :param arr: list to build from\n
@@ -36,7 +36,7 @@ def build_max_heap(arr: list[int]) -> binarytree.Node:
     return binarytree.build(arr)
 
 
-def build_min_heap(arr: list[int]) -> binarytree.Node:
+def build_min_heap(arr: list[int, None]) -> binarytree.Node:
     """
         Build min heap tree using binarytree.build\n
         :param arr: list to build from\n
@@ -46,7 +46,7 @@ def build_min_heap(arr: list[int]) -> binarytree.Node:
     return binarytree.build(arr)
 
 
-def build_heap(arr: list[int]) -> binarytree.Node:
+def build_heap(arr: list[int, None]) -> binarytree.Node:
     """
         Build heap tree using binarytree.build\n
         :param arr: list to build from\n
