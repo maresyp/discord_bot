@@ -1,8 +1,6 @@
 from discord.ext import commands
 import binarytree
-import discord
 
-from utils.heap_tree import build_max_heap, get_properties, build_heap
 from utils.utils import make_reply
 
 
