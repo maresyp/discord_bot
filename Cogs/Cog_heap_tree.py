@@ -45,4 +45,4 @@ class HeapTrees(commands.Cog):
         await ctx.reply(make_reply(ctx, response))
 
     async def cog_command_error(self, ctx, error):
-        ctx.reply(f'{error}')
+        await ctx.reply(f'{error}')
