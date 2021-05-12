@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands
 import asyncio
 
-from utils.heap_tree import build_max_heap, build_min_heap, build_heap
+from utils.heap_tree import build_max_heap, build_min_heap, build_heap, get_properties, prepare_response
 from utils.utils import make_reply
 
 
@@ -17,8 +17,9 @@ class HeapTrees(commands.Cog):
              'Usage: !heap_build_max 1 2 3 4 5'
     )
     async def build_max(self, ctx, *args: int):
-        tree: binarytree.Node = await asyncio.to_thread(build_max_heap, list(args))
-        await ctx.reply(make_reply(ctx, tree.__str__()))
+
+        response: str = await asyncio.to_thread(prepare_response, list(args), build_max_heap)
+        await ctx.reply(make_reply(ctx, response))
 
     @commands.command(
         name='heap_build_min',
@@ -28,8 +29,8 @@ class HeapTrees(commands.Cog):
              'Usage: !heap_build_min 1 2 3 4 5'
     )
     async def build_min(self, ctx, *args: int):
-        tree: binarytree.Node = await asyncio.to_thread(build_min_heap, list(args))
-        await ctx.reply(make_reply(ctx, tree.__str__()))
+        response: str = await asyncio.to_thread(prepare_response, list(args), build_min_heap)
+        await ctx.reply(make_reply(ctx, response))
 
     @commands.command(
         name='heap_build',
@@ -39,5 +40,5 @@ class HeapTrees(commands.Cog):
              'Usage: !heap_build 1 2 3 4 5'
     )
     async def build_x(self, ctx, *args: int):
-        tree: binarytree.Node = await asyncio.to_thread(build_heap, list(args))
-        await ctx.reply(make_reply(ctx, tree.__str__()))
+        response: str = await asyncio.to_thread(prepare_response, list(args), build_heap)
+        await ctx.reply(make_reply(ctx, response))
