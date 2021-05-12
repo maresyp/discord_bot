@@ -20,7 +20,7 @@ def prepare_response(arr: list[int], build_mode: Callable[[list[int]], binarytre
     :return: str with all of tree properties
     """
     tree: binarytree.Node = build_mode(arr)
-    result: str = f"From values -> {' '.join((str(_) for _ in arr))}\n\n" \
+    result: str = f"Output -> {' '.join((str(_) for _ in arr))}\n\n" \
                   f"{get_properties(tree)}\n" \
                   f"{tree.__str__()}"
     return result
