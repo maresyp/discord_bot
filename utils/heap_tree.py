@@ -4,11 +4,12 @@ import heapq
 
 def get_properties(tree: binarytree.Node) -> str:
     """
-    Get all properties of tree in form of str
+    Get all properties and values of tree in form of str
     """
     if not isinstance(tree, binarytree.Node):
         raise TypeError
-    return ''.join((f'{key}: {value}\n' for key, value in tree.properties.items()))
+    return ''.join((f'{key}: {value}\n' for key, value in tree.properties.items())) \
+           + ' '.join((str(_) for _ in tree.values))
 
 
 def build_max_heap(arr: list[int]) -> binarytree.Node:
