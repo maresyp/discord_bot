@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from typing import Optional
 
 
 def make_reply(context: discord.ext.commands.Context, command_output: str) -> str:
@@ -41,3 +42,16 @@ def check_for_elements(arr: list, required_amount: int, max_amount: int = None):
     if max_amount is not None:
         amount = len(arr)
         if amount > max_amount: raise ValueError(f'> Too many arguments passed ({amount}), max = {max_amount}')
+
+
+def parse_optional_int(arr: list[str]) -> list[Optional[int]]:
+    """
+    Convert list containing str to list of int / None
+    """
+    output: list[Optional[int]] = []
+    for elem in arr:
+        if elem == 'None':
+            output.append(None)
+        else:
+            output.append(int(elem))
+    return output
