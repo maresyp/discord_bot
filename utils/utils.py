@@ -46,11 +46,19 @@ def check_for_elements(arr: list, required_amount: int, max_amount: int = None):
 
 def parse_optional_int(arr: list[str]) -> list[Optional[int]]:
     """
-    Convert list containing str to list of int / None
+    Convert list containing str to list of int / None\n
+    Special syntax is supported with "->" operator which determines number of repetitions of given value\n
+    :raises ValueError when input is not convertible to int / None
     """
     output: list[Optional[int]] = []
     for elem in arr:
-        if elem == 'None':
+        if '->' in elem:
+            value, multiplayer = elem.split('->')
+            if value == 'None':
+                output.extend([None] * int(multiplayer))
+            else:
+                output.extend([int(value)] * int(multiplayer))
+        elif elem == 'None':
             output.append(None)
         else:
             output.append(int(elem))
