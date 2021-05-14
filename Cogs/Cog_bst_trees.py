@@ -51,7 +51,7 @@ class BSTTrees(commands.Cog):
     async def build_bst(self, ctx, *args):
         def prepare(arr: list[str]) -> str:
             bst_tree = binarytree.build(parse_optional_int(arr))
-            return f'From values -> {(str(_) for _ in bst_tree.values)}\n' \
+            return f"From values -> {' '.join((str(_) for _ in bst_tree.values))}\n" \
                    f'{get_properties(bst_tree)}\n' \
                    f"Inorder: {' '.join(str(elem.value) for elem in bst_tree.inorder)}\n" \
                    f"Preorder: {' '.join(str(elem.value) for elem in bst_tree.preorder)}\n" \
