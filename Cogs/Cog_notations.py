@@ -41,4 +41,5 @@ class Notations(commands.Cog):
         await ctx.reply(make_reply(ctx, reply))
 
     async def cog_command_error(self, ctx, error):
+        ctx.reply(make_reply(ctx, 'Something went wrong, try again'))
         print(error)
