@@ -24,8 +24,10 @@ class BSTTrees(commands.Cog):
              \n"""
              f'For this output, input should be:\n'
              f'!bst_build 15 7 30 4 13 25 34 2 None None None None 27 None None\n'
-             f'If a node is at index i, its left child is always at 2i + 1,\n'
-             f'right child at 2i + 2, and parent at floor((i - 1) / 2).\n'
+             f'If a node is at index i\n'
+             f'left child is always at 2i + 1,\n'
+             f'right child at 2i + 2\n'
+             f'parent at floor((i - 1) / 2).\n'
              f'"None" indicates absence of a node at that index.\n'
              f'In case of values repeating themselves special syntax with -> operator is supported\n'
              f'None->3 is equivalent to None None None\n'
