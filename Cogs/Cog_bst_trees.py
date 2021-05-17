@@ -105,7 +105,9 @@ class BSTTrees(commands.Cog):
                 return res
 
             return f'{insert(bst_tree, value)}\n' \
-                   f'{bst_tree.__str__()}'
+                   f'{bst_tree.__str__()}\n' \
+                   f"Tree values:\n" \
+                   f"{' '.join((str(_) for _ in bst_tree.values))}"
 
         response: str = await asyncio.to_thread(prepare, list(args))
         await ctx.reply(make_reply(ctx, response))
