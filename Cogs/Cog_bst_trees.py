@@ -62,3 +62,44 @@ class BSTTrees(commands.Cog):
 
         response: str = await asyncio.to_thread(prepare, list(args))
         await ctx.reply(make_reply(ctx, response))
+
+    @commands.command(
+        name='bst_insert',
+        brief='Insert value to BST Tree [ BETA ]',
+        help='Insert value to BST Tree'
+    )
+    async def insert_bst(self, ctx, *args):
+        def prepare(arr: list[str]) -> str:
+            if arr[1] != '->':
+                return "Syntax Error '->' missing, use !help and try again"
+            try:
+                value = int(arr[0])
+            except ValueError:
+                return f'{arr[0]} is not convertible to int'
+            try:
+                bst_tree = binarytree.build(parse_optional_int(arr[1:]))
+            except ValueError:
+                return "Unable to create bst tree, please check your input\n" \
+                       "All values should be convertible to int / None"
+
+            def insert(root: binarytree.Node, val: int) -> str:
+                res = ''
+                if val > root.value:
+                    res += f'{val} > {root.value} going right\n'
+                    if root.right.value is None:
+                        res += 'None found, inserting value\n'
+                        root.right = binarytree.Node(val)
+                    else:
+                        res += insert(root.right, val)
+                else:
+                    res += f'{val} < {root.value} going left\n'
+                    if root.left.value is None:
+                        res += 'None found, inserting value\n'
+                        root.left = binarytree.Node(val)
+                    else:
+                        res += insert(root.left, val)
+                return res
+            return insert(bst_tree, value)
+
+        response: str = await asyncio.to_thread(prepare, list(args))
+        await ctx.reply(make_reply(ctx, response))
