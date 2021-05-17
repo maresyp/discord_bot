@@ -66,7 +66,10 @@ class BSTTrees(commands.Cog):
     @commands.command(
         name='bst_insert',
         brief='Insert value to BST Tree [ BETA ]',
-        help='Insert value to BST Tree'
+        help='Insert value to BST Tree\n'
+             'Usage:\n'
+             '!bst_insert <value> -> <array representation of bst tree>\n'
+             '!bst_insert 10 -> 15 7 30 4 13 25 34 2 None->4 27 None->2'
     )
     async def insert_bst(self, ctx, *args):
         def prepare(arr: list[str]) -> str:
