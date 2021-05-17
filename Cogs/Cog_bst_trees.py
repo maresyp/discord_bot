@@ -77,7 +77,7 @@ class BSTTrees(commands.Cog):
             except ValueError:
                 return f'{arr[0]} is not convertible to int'
             try:
-                bst_tree = binarytree.build(parse_optional_int(arr[1:]))
+                bst_tree = binarytree.build(parse_optional_int(arr[2:]))
             except ValueError:
                 return "Unable to create bst tree, please check your input\n" \
                        "All values should be convertible to int / None"
@@ -99,7 +99,9 @@ class BSTTrees(commands.Cog):
                     else:
                         res += insert(root.left, val)
                 return res
-            return insert(bst_tree, value)
+
+            return f'{insert(bst_tree, value)}\n' \
+                   f'{bst_tree.__str__()}'
 
         response: str = await asyncio.to_thread(prepare, list(args))
         await ctx.reply(make_reply(ctx, response))
