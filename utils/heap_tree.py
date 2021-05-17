@@ -53,3 +53,9 @@ def build_heap(arr: list[int, None]) -> binarytree.Node:
         :return: binarytree.Node
         """
     return binarytree.build(arr)
+
+
+def heap_sort_max_desc(arr: list[int]) -> str:
+    """ Heap sort max, descending order"""
+    pass
+
