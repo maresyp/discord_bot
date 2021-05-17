@@ -83,17 +83,26 @@ class BSTTrees(commands.Cog):
                        "All values should be convertible to int / None"
 
             def insert(root: binarytree.Node, val: int) -> str:
+                print('starting insert')
                 res = ''
+                if val == root.value:
+                    print('duplicates are not allowed')
+                    res += f'Duplicates are not allowed in bst tree !\n' \
+                           f'{val} == {root.value}'
                 if val > root.value:
+                    print('right')
                     res += f'{val} > {root.value} going right\n'
-                    if root.right.value is None:
+                    if root.right is None:
+                        print('none found')
                         res += 'None found, inserting value\n'
                         root.right = binarytree.Node(val)
                     else:
                         res += insert(root.right, val)
                 else:
+                    print('left')
                     res += f'{val} < {root.value} going left\n'
-                    if root.left.value is None:
+                    if root.left is None:
+                        print('none found')
                         res += 'None found, inserting value\n'
                         root.left = binarytree.Node(val)
                     else:
