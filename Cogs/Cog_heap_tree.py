@@ -1,7 +1,7 @@
 from discord.ext import commands
 import asyncio
 
-from utils.heap_tree import build_max_heap, build_min_heap, build_heap, prepare_response
+from utils.heap_tree import build_max_heap, build_min_heap, build_heap, prepare_response, heap_sort_max_asc
 from utils.utils import make_reply
 
 
@@ -38,6 +38,16 @@ class HeapTrees(commands.Cog):
     )
     async def build_x(self, ctx, *args: int):
         response: str = await asyncio.to_thread(prepare_response, list(args), build_heap)
+        await ctx.reply(make_reply(ctx, response))
+
+    @commands.command(
+        name='heap_sort_max_asc',
+        brief='Max Heap Sort ascending order',
+        help='Max Heap Sort ascending order\n'
+             'Usage: !heap_sort_max_asc 15 10 13 7 8 9 4 2 1 3'
+    )
+    async def heap_sort_ma(self, ctx, *args: int):
+        response: str = await asyncio.to_thread(heap_sort_max_asc, list(args))
         await ctx.reply(make_reply(ctx, response))
 
     async def cog_command_error(self, ctx, error):

@@ -55,7 +55,15 @@ def build_heap(arr: list[int, None]) -> binarytree.Node:
     return binarytree.build(arr)
 
 
-def heap_sort_max_desc(arr: list[int]) -> str:
-    """ Heap sort max, descending order"""
-    pass
-
+def heap_sort_max_asc(arr: list[int]) -> str:
+    """ Heap sort max, ascending order"""
+    result: str = ''
+    sorted_arr: list[int] = []
+    heapq._heapify_max(arr)
+    result += f"{' '.join((str(elem) for elem in arr))} <- Sorting this\n"
+    while len(arr) > 1:
+        arr[0], arr[-1] = arr[-1], arr[0]
+        sorted_arr.insert(0, arr.pop())
+        heapq._heapify_max(arr)
+        result += f"{' '.join((str(elem) for elem in arr))} {' '.join((str(elem) for elem in sorted_arr))}\n"
+    return result
