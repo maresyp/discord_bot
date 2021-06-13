@@ -19,4 +19,4 @@ class Graphs(commands.Cog):
                 return str(e)
             return g.adjacency_list() + '\n' + g.adjacency_matrix()
         response: str = await asyncio.to_thread(prepare)
-        ctx.reply(make_reply(ctx, response))
+        await ctx.reply(make_reply(ctx, response))
