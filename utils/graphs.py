@@ -5,6 +5,42 @@ class Graph:
         else:
             self.vertices = graph_dict
 
+    @staticmethod
+    def from_string(str_input: str) -> "Graph":
+        """
+        Create Graph from string
+        :return: Graph Object
+        """
+        # "{3,2} {1,2} {3,4}" or "(1,2) (2,3)"
+        tmp_graph: Graph = Graph()
+        graph_type: str = str_input[0]  # { or (
+        tmp_input: list[str] = str_input.split(' ')
+        if graph_type == '{':
+            for vertices in tmp_input:
+                vertices = vertices.replace('{', '').replace('}', '')
+                try:
+                    left_node, right_node = vertices.split(',')
+                except ValueError:  # re raise exception with user friendly message
+                    raise ValueError(f'Wrong input -> {{{vertices}}}')
+                if len(left_node) == 0 or len(right_node) == 0:
+                    raise ValueError(f'Wrong input -> {{{vertices}}}')
+                tmp_graph.add_edge(left_node, right_node)
+                tmp_graph.add_edge(right_node, left_node)
+        elif graph_type == '(':
+            for vertices in tmp_input:
+                vertices = vertices.replace('(', '').replace(')', '')
+                try:
+                    left_node, right_node = vertices.split(',')
+                except ValueError:
+                    raise ValueError(f'Wrong input -> ({vertices})')
+                if len(left_node) == 0 or len(right_node) == 0:
+                    raise ValueError(f'Wrong input -> ({vertices})')
+                tmp_graph.add_edge(left_node, right_node)
+                tmp_graph.add_vertex(right_node)
+        else:
+            raise ValueError('Expected { or ( but got ', graph_type)
+        return tmp_graph
+
     def adjacency_list(self) -> str:
         result: str = ''
         for vertex in self.vertices:
@@ -33,6 +69,10 @@ class Graph:
         else:
             self.vertices[starting_vertex] = [ending_vertex]
 
+    def add_vertex(self, vertex: str) -> None:
+        if vertex not in self.vertices:
+            self.vertices[vertex] = []
+
     def bfs(self, starting_vertex: str) -> str:
         if starting_vertex not in self.vertices:
             return 'Starting vertex not in Graph'
@@ -54,6 +94,8 @@ class Graph:
         return result
 
     def dfs(self, starting_index: str) -> str:
+        if starting_index not in self.vertices:
+            return 'Starting vertex not in Graph'
         explored, stack = set(starting_index), [starting_index]
         result: str = ''
         while stack:
@@ -62,7 +104,7 @@ class Graph:
             for adj in self.vertices[vertex]:
                 if adj not in explored:
                     stack.append(adj)
-            result += (f"From {stack[0]} visit -> {' -> '.join((str(tmp) + (' ( visited )' if tmp in explored else ' ( not visited )') for tmp in self.vertices[stack[0]]))}\n")
+            result += f"From {stack[0]} visit -> {' -> '.join((str(tmp) + (' ( visited )' if tmp in explored else ' ( not visited )') for tmp in self.vertices[stack[0]]))}\n"
             stack.pop(0)
         return result
 
@@ -86,8 +128,8 @@ if __name__ == '__main__':
         'g': ['c'],
         'h': ['c']
     }
-    g = Graph(graph)
+    g = Graph.from_string("(,) (,)")
     print(g.adjacency_matrix())
     print(g.adjacency_list())
-    print(g.bfs('b'))
-    print(g.dfs('b'))
+    print(g.bfs('x'))
+    print(g.dfs('X'))
