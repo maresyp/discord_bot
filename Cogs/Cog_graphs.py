@@ -14,7 +14,7 @@ class Graphs(commands.Cog):
     async def graph_info(self, ctx, *args: str):
         def prepare() -> str:
             try:
-                g: graphs.Graph = graphs.Graph.from_string(''.join(args))
+                g: graphs.Graph = graphs.Graph.from_string(' '.join(args))
             except ValueError as e:
                 return str(e)
             return g.adjacency_list() + '\n' + g.adjacency_matrix()
