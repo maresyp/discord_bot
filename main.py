@@ -7,7 +7,7 @@ from Cogs.Cog_bst_trees import BSTTrees
 from Cogs.Cog_graphs import Graphs
 from Cogs.Cog_heap_tree import HeapTrees
 from Cogs.Cog_sorting import Sorting
-# from Cogs.Cog_binary_trees import BinaryTrees
+from Cogs.Cog_binary_trees import BinaryTrees
 from Cogs.Cog_functions import Functions
 from Cogs.Cog_git import Git
 from Cogs.Cog_notations import Notations
@@ -20,7 +20,7 @@ bot = commands.Bot(command_prefix='!')
 # Add Cogs here
 bot.add_cog(Sorting())
 bot.add_cog(Onp())
-bot.add_cog(BinaryTrees())
+# bot.add_cog(BinaryTrees())
 # bot.add_cog(Git())
 bot.add_cog(Notations())
 bot.add_cog(Functions())
