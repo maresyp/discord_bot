@@ -41,7 +41,7 @@ class HeapTrees(commands.Cog):
         await ctx.reply(make_reply(ctx, response))
 
     @commands.command(
-        name='heap_sort_max_asc',
+        name="heap_sort_max_asc",
         brief='Max Heap Sort ascending order',
         help='Max Heap Sort ascending order\n'
              'Usage: !heap_sort_max_asc 15 10 13 7 8 9 4 2 1 3'
