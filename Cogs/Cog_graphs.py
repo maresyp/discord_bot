@@ -8,8 +8,10 @@ class Graphs(commands.Cog):
 
     @commands.command(
         name='graph',
-        brief='g',
-        help='g'
+        brief='Graph Adjacency',
+        help='!graph {a,b} {b,c} {a,a}\n'
+             '!graph (a,b) (b,c) (a,a)\n'
+             'Space separator --^'
     )
     async def graph_info(self, ctx, *args: str):
         def prepare() -> str:
