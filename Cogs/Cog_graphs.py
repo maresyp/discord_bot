@@ -31,4 +31,11 @@ class Graphs(commands.Cog):
              'Space separator --^'
     )
     async def graph_bfs(self, ctx, *args: str):
-        await ctx.reply(make_reply(ctx, 'Bardzo fajna sprawa'))
+        def prepare() -> str:
+            try:
+                g: graphs.Graph = graphs.Graph.from_string(' '.join(args[1:]))
+            except ValueError as e:
+                return str(e)
+            return g.bfs(args[0])
+        response: str = await asyncio.to_thread(prepare)
+        await ctx.reply(make_reply(ctx, response))
