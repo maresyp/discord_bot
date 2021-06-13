@@ -22,3 +22,13 @@ class Graphs(commands.Cog):
             return g.adjacency_list() + '\n' + g.adjacency_matrix()
         response: str = await asyncio.to_thread(prepare)
         await ctx.reply(make_reply(ctx, response))
+
+    @commands.command(
+        name='bfs',
+        brief='BFS',
+        help='!bfs <start> {a,b} {b,c} {a,a}\n'
+             '!bfs <start> (a,b) (b,c) (a,a)\n'
+             'Space separator --^'
+    )
+    async def graph_bfs(self, ctx, *args: str):
+        await ctx.reply(make_reply(ctx, 'Bardzo fajna sprawa'))
