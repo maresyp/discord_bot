@@ -28,6 +28,7 @@ bot.add_cog(HeapTrees())
 bot.add_cog(BSTTrees())
 bot.add_cog(Graphs())
 
+
 @bot.event
 async def on_ready():
     print('Hello, I\'m ready to help you')
