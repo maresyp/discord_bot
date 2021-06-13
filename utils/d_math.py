@@ -19,7 +19,7 @@ def match_numbers(number: int, divisible: list[Union[set[int], int]] = None,
     :return: number of matches
     """
     if number <= 0: raise ValueError('Number must be greater than 1')
-    if number > 6: raise ValueError('Too many numbers to brute force')
+    if number > 6: raise ValueError('Too many numbers to check max = 6')
     if divisible is None: divisible = []
     if not_divisible is None: not_divisible = []
     matches: int = 0
@@ -34,6 +34,10 @@ def match_numbers(number: int, divisible: list[Union[set[int], int]] = None,
             if isinstance(n_div, tuple):
                 helper.add(any([True for elem in n_div if num % elem != 0]))
             helper.add(num % n_div != 0)
-        if len(helper) == 1 and helper.pop() == True: matches += 1
+        if len(helper) == 1 and helper.pop() is True: matches += 1
         helper.clear()
     return matches
+
+
+if __name__ == '__main__':
+    print(match_numbers(4, [(2, 9, 14)]))
