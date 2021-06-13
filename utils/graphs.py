@@ -44,7 +44,7 @@ class Graph:
     def adjacency_list(self) -> str:
         result: str = ''
         for vertex in self.vertices:
-            result += f"{vertex} : {' -> '.join((str(tmp) for tmp in self.vertices[vertex]))}\n"
+            result += f"{vertex} -> {' -> '.join((str(tmp) for tmp in self.vertices[vertex]))}\n"
         return result
 
     def adjacency_matrix(self) -> str:
@@ -128,7 +128,7 @@ if __name__ == '__main__':
         'g': ['c'],
         'h': ['c']
     }
-    g = Graph.from_string("(,) (,)")
+    g = Graph.from_string("{a,b} {a,c} {b,d}")
     print(g.adjacency_matrix())
     print(g.adjacency_list())
     print(g.bfs('x'))
