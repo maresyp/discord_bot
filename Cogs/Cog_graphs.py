@@ -11,10 +11,10 @@ class Graphs(commands.Cog):
         brief='g',
         help='g'
     )
-    async def graph_info(self, ctx, graph: str):
+    async def graph_info(self, ctx, *args: str):
         def prepare() -> str:
             try:
-                g: graphs.Graph = graphs.Graph.from_string(graph)
+                g: graphs.Graph = graphs.Graph.from_string(''.join(args))
             except ValueError as e:
                 return str(e)
             return g.adjacency_list() + '\n' + g.adjacency_matrix()
