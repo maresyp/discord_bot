@@ -86,15 +86,15 @@ class Graph:
         queue = []
         visited.add(starting_vertex)
         queue.append(starting_vertex)
-        result += f":white_circle: {queue[0]} | {queue[0]}\n"
+        result += f":white_circle:⚪ {queue[0]} | {queue[0]}\n"
         while queue:
             vertex = queue[0]
             for adj_vert in self.vertices[vertex]:
                 if adj_vert not in visited:
                     queue.append(adj_vert)
                     visited.add(adj_vert)
-                    result += f":white_circle: {adj_vert} | {' '.join((str(q) for q in queue))}\n"
-            result += f":black_circle: {queue[0]} | {' '.join((str(q) for q in queue[1:]))}\n"
+                    result += f":white_circle:⚪ {adj_vert} | {' '.join((str(q) for q in queue))}\n"
+            result += f":black_circle:⚫ {queue[0]} | {' '.join((str(q) for q in queue[1:]))}\n"
             queue.pop(0)
         return result
 
