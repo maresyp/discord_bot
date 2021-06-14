@@ -32,7 +32,7 @@ class Graph:
                 tmp_graph.add_edge(left_node, right_node)
                 tmp_graph.add_edge(right_node, left_node)
         elif graph_type == '(':
-            for vertices in tmp_input:
+            for vertices in tmp_input[1:]:
                 vertices = vertices.replace('(', '').replace(')', '').replace('{', '').replace('}', '')
                 try:
                     left_node, right_node = vertices.split(',')
