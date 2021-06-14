@@ -25,7 +25,7 @@ class Graphs(commands.Cog):
 
     @commands.command(
         name='bfs',
-        brief='BFS',
+        brief='Breadth First Search',
         help='!bfs *start* <a,b,c> {a,b} {b,c} {a,a}\n'
              '!bfs *start* <a,b,c> (a,b) (b,c) (a,a)\n'
              'Space separator   --^'
