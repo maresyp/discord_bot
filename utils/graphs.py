@@ -17,7 +17,7 @@ class Graph:
         tmp_input: list[str] = str_input.split(' ')
         if graph_type == '{':
             for vertices in tmp_input:
-                vertices = vertices.replace('{', '').replace('}', '')
+                vertices = vertices.replace('{', '').replace('}', '').replace('(', '').replace(')', '')
                 try:
                     left_node, right_node = vertices.split(',')
                 except ValueError:  # re raise exception with user friendly message
@@ -28,7 +28,7 @@ class Graph:
                 tmp_graph.add_edge(right_node, left_node)
         elif graph_type == '(':
             for vertices in tmp_input:
-                vertices = vertices.replace('(', '').replace(')', '')
+                vertices = vertices.replace('(', '').replace(')', '').replace('{', '').replace('}', '')
                 try:
                     left_node, right_node = vertices.split(',')
                 except ValueError:
