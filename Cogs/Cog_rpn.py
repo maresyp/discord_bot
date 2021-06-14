@@ -9,8 +9,7 @@ from utils.utils import make_reply
 class Onp(commands.Cog):
 
     @commands.command(
-        name='onp',
-        aliases=['rpn'],
+        name='rpn',
         brief='Reverse Polish Notation',
         help='Usage: !onp ( ( 2 + 7 ) / 3 + ( 14 - 3 ) * 4 ) / 2 <- All elements are separated by space'
     )
