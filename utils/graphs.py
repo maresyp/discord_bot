@@ -11,12 +11,17 @@ class Graph:
         Create Graph from string
         :return: Graph Object
         """
-        # "{3,2} {1,2} {3,4}" or "(1,2) (2,3)"
+        # "<1,2,3,4> {3,2} {1,2} {3,4}" or "<1,2,3> (1,2) (2,3)"
         tmp_graph: Graph = Graph()
-        graph_type: str = str_input[0]  # { or (
+        graph_type: str = '{' if '{' in str_input else '('  # { or (
+        if '<' not in str_input and '>' not in str_input:
+            raise ValueError('List of vertices not found, use <>')
         tmp_input: list[str] = str_input.split(' ')
+        vertex = tmp_input[0]
+        for v in vertex.replace('<', '').replace('>', '').split(','):
+            tmp_graph.add_vertex(v)
         if graph_type == '{':
-            for vertices in tmp_input:
+            for vertices in tmp_input[1:]:
                 vertices = vertices.replace('{', '').replace('}', '').replace('(', '').replace(')', '')
                 try:
                     left_node, right_node = vertices.split(',')
