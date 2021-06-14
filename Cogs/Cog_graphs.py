@@ -9,9 +9,9 @@ class Graphs(commands.Cog):
     @commands.command(
         name='graph',
         brief='Graph Adjacency',
-        help='!graph {a,b} {b,c} {a,a}\n'
-             '!graph (a,b) (b,c) (a,a)\n'
-             'Space separator --^'
+        help='!graph <a,b,c> {a,b} {b,c} {a,a}\n'
+             '!graph <a,b,c> (a,b) (b,c) (a,a)\n'
+             'Space separator   --^'
     )
     async def graph_info(self, ctx, *args: str):
         def prepare() -> str:
@@ -26,9 +26,9 @@ class Graphs(commands.Cog):
     @commands.command(
         name='bfs',
         brief='BFS',
-        help='!bfs <start> {a,b} {b,c} {a,a}\n'
-             '!bfs <start> (a,b) (b,c) (a,a)\n'
-             'Space separator --^'
+        help='!bfs *start* <a,b,c> {a,b} {b,c} {a,a}\n'
+             '!bfs *start* <a,b,c> (a,b) (b,c) (a,a)\n'
+             'Space separator   --^'
     )
     async def graph_bfs(self, ctx, *args: str):
         def prepare() -> str:
