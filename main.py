@@ -12,6 +12,7 @@ from Cogs.Cog_functions import Functions
 from Cogs.Cog_git import Git
 from Cogs.Cog_notations import Notations
 from Cogs.Cog_rpn import Onp
+from Cogs.Cog_math import Math
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN', default=None)
@@ -27,6 +28,7 @@ bot.add_cog(Functions())
 bot.add_cog(HeapTrees())
 bot.add_cog(BSTTrees())
 bot.add_cog(Graphs())
+bot.add_cog(Math())
 
 
 @bot.event
