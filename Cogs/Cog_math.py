@@ -3,4 +3,12 @@ import asyncio
 
 
 class Math(commands.Cog):
-    pass
+
+    @commands.command(
+        name='count_numbers',
+        brief='Count Numbers',
+        help='Usage:\n'
+             '!count_numbers <ile_cyfr> <>'
+    )
+    async def count_numbers(self, ctx, *args: str):
+        pass
