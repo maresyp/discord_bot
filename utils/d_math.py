@@ -1,8 +1,8 @@
 from typing import Union
 
 
-def match_numbers(number: int, divisible: list[Union[set[int], int]] = None,
-                  not_divisible: list[Union[set[int], int]] = None) -> int:
+def match_numbers(number: int, divisible: list[Union[tuple[int], int]] = None,
+                  not_divisible: list[Union[tuple[int], int]] = None) -> int:
     """
     Determine how many numbers matching given criteria\n
     :param number: power of 10 determining upper limit of digits\n
@@ -33,11 +33,12 @@ def match_numbers(number: int, divisible: list[Union[set[int], int]] = None,
         for n_div in not_divisible:
             if isinstance(n_div, tuple):
                 helper.add(any([True for elem in n_div if num % elem != 0]))
-            helper.add(num % n_div != 0)
+            else:
+                helper.add(num % n_div != 0)
         if len(helper) == 1 and helper.pop() is True: matches += 1
         helper.clear()
     return matches
 
 
 if __name__ == '__main__':
-    print(match_numbers(4, [(2, 9, 14)]))
+    print(match_numbers(2, [(1, 2), 1], [1, 2]))
