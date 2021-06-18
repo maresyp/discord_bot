@@ -11,7 +11,7 @@ class Onp(commands.Cog):
     @commands.command(
         name='rpn',
         brief='Reverse Polish Notation',
-        help='Usage: !onp ( ( 2 + 7 ) / 3 + ( 14 - 3 ) * 4 ) / 2 <- All elements are separated by space'
+        help='Usage: !rpn ( ( 2 + 7 ) / 3 + ( 14 - 3 ) * 4 ) / 2 <- All elements are separated by space'
     )
     async def onp(self, ctx, *args):
 
