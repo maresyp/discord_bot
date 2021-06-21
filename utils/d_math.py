@@ -41,4 +41,4 @@ def match_numbers(number: int, divisible: list[Union[tuple[int], int]] = None,
 
 
 if __name__ == '__main__':
-    print(match_numbers(2, [(1, 2), 2], [1, 2]))
+    print(match_numbers(2, [(1, 2), 3], [1, 2]))
